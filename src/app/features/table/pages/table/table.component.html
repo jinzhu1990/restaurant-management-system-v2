@@ -1,0 +1,12 @@
+<ng-container *ngIf="isLoading$ | async; else loaded">
+  <div class="center">
+    <mat-spinner [diameter]="20" />
+  </div>
+</ng-container>
+
+<ng-template #loaded>
+  <div *ngIf="table$ | async as table" class="table">
+    <h1 class="title">table</h1>
+
+  </div>
+</ng-template>

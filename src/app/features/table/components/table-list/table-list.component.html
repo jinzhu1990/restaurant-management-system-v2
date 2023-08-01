@@ -1,0 +1,47 @@
+<mat-grid-list cols="12" rowHeight="1:4">
+  <!-- First column with a width of 3 parts out of 12 -->
+  <mat-grid-tile colspan="3">
+    <div class="restaurant-info">
+      <h2 class="restaurant-title">Welcome to Our Restaurant!</h2>
+      <p class="restaurant-description">
+        We take pride in offering you a delightful dining experience filled with exquisite flavors and warm
+        hospitality.
+      </p>
+      <p class="restaurant-description">
+        Indulge in our carefully crafted menu, featuring a wide range of delectable dishes prepared by our skilled
+        chefs using the finest ingredients.
+      </p>
+      <p class="restaurant-description">
+        Whether you're joining us for a special occasion or a casual meal, our cozy ambiance and attentive service will
+        ensure a memorable time.
+      </p>
+      <p class="restaurant-description">
+        <code class="reservation-code">Join us</code> and savor the essence of culinary perfection at our restaurant.
+      </p>
+      <br>
+    </div>
+  </mat-grid-tile>
+
+  <!-- Second column with a width of 9 parts out of 12 -->
+  <mat-grid-tile colspan="9">
+    <ng-container *ngIf="tableData$ | async as table">
+      <div class="table-container">
+        <mat-card class="table" *ngFor="let item of table" [class.table-done]="item.reserved">
+          <mat-card-header>
+            <span class="table-label">
+              {{ item.location }} ({{ item.sit }} sits)
+            </span>
+          </mat-card-header>
+          <mat-card-content>
+            <button mat-button class="btn-reserve" *ngIf="!item.reserved" (click)="reserve(item.id)">
+              <mat-icon>done_outline</mat-icon> Reserve
+            </button>
+            <button mat-button class="btn-cancel" *ngIf="item.reserved" (click)="reserve(item.id)">
+              <mat-icon>cancel</mat-icon> Cancel
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </ng-container>
+  </mat-grid-tile>
+</mat-grid-list>
